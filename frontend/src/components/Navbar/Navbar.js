@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import logo from '../../assets/images/logo1.png'; 
+import logo from '../../assets/images/logo1.png';
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -15,22 +15,22 @@ const Navbar = () => {
         if (response.status === 200 && response.data) {
           setUser(response.data);
 
-          if (response.data._id) {
+          const userId = response.data._id;
+          if (userId) {
             const [collegeResponse, societyResponse] = await Promise.all([
-              axios.get(`/college/exists/${response.data._id}`, { withCredentials: true }),
-              axios.get(`/society/exists/${response.data._id}`, { withCredentials: true }),
+              axios.get(`/college/exists/${userId}`, { withCredentials: true }),
+              axios.get(`/society/exists/${userId}`, { withCredentials: true }),
             ]);
 
             setCollegeExists(collegeResponse.data.exists);
             setSocietyExists(societyResponse.data.exists);
           } else {
-            throw new Error("User ID is undefined");
+            console.error('User ID is undefined');
           }
         }
       } catch (err) {
         if (err.response && err.response.status === 401) {
-          // User not logged in, no action needed
-          setUser(null);
+          setUser(null); // User not logged in
         } else if (err.response && err.response.status === 404) {
           console.error('Endpoint not found:', err.response.config.url);
         } else {
