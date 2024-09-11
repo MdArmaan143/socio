@@ -1,0 +1,50 @@
+.btn_one {
+    position: fixed;
+    top: 24px;
+    left: 30px;
+    color: white;
+}
+
+#check {
+    display: none;
+}
+
+.menubar {
+    position: fixed;
+    left: -250px;
+    top: 80px;
+    transition: all 0.3s linear;
+}
+
+.menubar .btn_two {
+    position: absolute;
+    top: -55px;
+    left: 30px;
+    opacity: 0;
+}
+
+#check:checked ~ .btn_one {
+    opacity: 0;
+}
+
+#check:checked ~ .menubar {
+    left: 0;
+}
+
+#check:checked ~ .menubar .btn_two {
+    opacity: 1;
+}
+
+.parent_div {
+    width: 1%;
+    transition: all 0.3s linear;
+}
+
+.parent_div.menu-open {
+    width: 240px;
+}
+
+.scrollable{
+    overflow: scroll;
+    height: 150px;
+}
